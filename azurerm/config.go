@@ -40,6 +40,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/arm/trafficmanager"
 	"github.com/Azure/azure-sdk-for-go/arm/web"
 	keyVault "github.com/Azure/azure-sdk-for-go/dataplane/keyvault"
+	managedCluster "github.com/Azure/azure-sdk-for-go/services/containerservice/mgmt/2017-09-30/containerservice"
 	mainStorage "github.com/Azure/azure-sdk-for-go/storage"
 	"github.com/Azure/go-autorest/autorest"
 	"github.com/Azure/go-autorest/autorest/adal"
@@ -103,6 +104,7 @@ type ArmClient struct {
 	containerRegistryClient containerregistry.RegistriesClient
 	containerServicesClient containerservice.ContainerServicesClient
 	containerGroupsClient   containerinstance.ContainerGroupsClient
+	managedClustersClient   managedCluster.ManagedClustersClient
 
 	eventGridTopicsClient       eventgrid.TopicsClient
 	eventHubClient              eventhub.EventHubsClient
@@ -385,6 +387,13 @@ func getArmClient(c *authentication.Config) (*ArmClient, error) {
 	cgc.Sender = autorest.CreateSender(withRequestLogging())
 	cgc.SkipResourceProviderRegistration = c.SkipProviderRegistration
 	client.containerGroupsClient = cgc
+
+	cmc := managedCluster.NewManagedClustersClientWithBaseURI(endpoint, c.SubscriptionID)
+	setUserAgent(&cmc.Client)
+	cmc.Authorizer = auth
+	cmc.Sender = autorest.CreateSender(withRequestLogging())
+	cmc.SkipResourceProviderRegistration = c.SkipProviderRegistration
+	client.managedClustersClient = cmc
 
 	cdb := cosmosdb.NewDatabaseAccountsClientWithBaseURI(endpoint, c.SubscriptionID)
 	setUserAgent(&cdb.Client)

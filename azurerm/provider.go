@@ -98,6 +98,7 @@ func Provider() terraform.ResourceProvider {
 			"azurerm_container_registry":          resourceArmContainerRegistry(),
 			"azurerm_container_service":           resourceArmContainerService(),
 			"azurerm_container_group":             resourceArmContainerGroup(),
+			"azurerm_managed_cluster":             resourceArmManagedCluster(),
 			"azurerm_cosmosdb_account":            resourceArmCosmosDBAccount(),
 			"azurerm_dns_a_record":                resourceArmDnsARecord(),
 			"azurerm_dns_aaaa_record":             resourceArmDnsAAAARecord(),
