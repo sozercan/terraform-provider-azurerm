@@ -103,6 +103,7 @@ type ArmClient struct {
 	containerRegistryClient containerregistry.RegistriesClient
 	containerServicesClient containerservice.ContainerServicesClient
 	containerGroupsClient   containerinstance.ContainerGroupsClient
+	managedClustersClient   containerservice.ManagedClustersClient
 
 	eventGridTopicsClient       eventgrid.TopicsClient
 	eventHubClient              eventhub.EventHubsClient
@@ -396,6 +397,13 @@ func getArmClient(c *authentication.Config) (*ArmClient, error) {
 	cgc.Sender = autorest.CreateSender(withRequestLogging())
 	cgc.SkipResourceProviderRegistration = c.SkipProviderRegistration
 	client.containerGroupsClient = cgc
+
+	cmc := managedCluster.NewManagedClustersClientWithBaseURI(endpoint, c.SubscriptionID)
+	setUserAgent(&cmc.Client)
+	cmc.Authorizer = auth
+	cmc.Sender = autorest.CreateSender(withRequestLogging())
+	cmc.SkipResourceProviderRegistration = c.SkipProviderRegistration
+	client.managedClustersClient = cmc
 
 	cdb := cosmosdb.NewDatabaseAccountsClientWithBaseURI(endpoint, c.SubscriptionID)
 	setUserAgent(&cdb.Client)

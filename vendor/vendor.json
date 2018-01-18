@@ -115,6 +115,14 @@
 			"versionExact": "v12.2.0-beta"
 		},
 		{
+			"checksumSHA1": "NFSj8gfcGlDZ2glBysphW16m/4o=",
+			"path": "github.com/Azure/azure-sdk-for-go/services/containerservice/mgmt/2017-09-30/containerservice",
+			"revision": "934e2462aeb6e0c14186dcfeedd73a026d1b8eeb",
+			"revisionTime": "2017-12-28T21:56:53Z",
+			"version": "v12.1.0-beta",
+			"versionExact": "v12.1.0-beta"
+		},
+		{
 			"checksumSHA1": "aSAQM4LTlSAyWJTSMCJjBxUkmVI=",
 			"path": "github.com/Azure/azure-sdk-for-go/arm/mysql",
 			"revision": "eae258195456be76b2ec9ad2ee2ab63cdda365d9",
