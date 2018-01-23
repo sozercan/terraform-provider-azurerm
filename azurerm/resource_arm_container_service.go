@@ -110,7 +110,6 @@ func resourceArmContainerService() *schema.Resource {
 			"agent_pool_profile": {
 				Type:     schema.TypeSet,
 				Required: true,
-				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
@@ -552,27 +551,29 @@ func expandAzureRmContainerServiceServicePrincipal(d *schema.ResourceData) *cont
 
 func expandAzureRmContainerServiceAgentProfiles(d *schema.ResourceData) []containerservice.AgentPoolProfile {
 	configs := d.Get("agent_pool_profile").(*schema.Set).List()
-	config := configs[0].(map[string]interface{})
 	profiles := make([]containerservice.AgentPoolProfile, 0, len(configs))
 
-	name := config["name"].(string)
-	count := int32(config["count"].(int))
-	dnsPrefix := config["dns_prefix"].(string)
-	vmSize := config["vm_size"].(string)
+	for _, agentPoolConfig := range configs {
+		config := agentPoolConfig.(map[string]interface{})
+		name := config["name"].(string)
+		count := int32(config["count"].(int))
+		dnsPrefix := config["dns_prefix"].(string)
+		vmSize := config["vm_size"].(string)
 
-	profile := containerservice.AgentPoolProfile{
-		Name:      &name,
-		Count:     &count,
-		VMSize:    containerservice.VMSizeTypes(vmSize),
-		DNSPrefix: &dnsPrefix,
+		profile := containerservice.AgentPoolProfile{
+			Name:      &name,
+			Count:     &count,
+			VMSize:    containerservice.VMSizeTypes(vmSize),
+			DNSPrefix: &dnsPrefix,
+		}
+
+		if c := int32(config["os_disk_size_gb"].(int)); c != 0 {
+			osDiskSizeGB := int32(config["os_disk_size_gb"].(int))
+			profile.OsDiskSizeGB = &osDiskSizeGB
+		}
+
+		profiles = append(profiles, profile)
 	}
-
-	if c := int32(config["os_disk_size_gb"].(int)); c != 0 {
-		osDiskSizeGB := int32(config["os_disk_size_gb"].(int))
-		profile.OsDiskSizeGB = &osDiskSizeGB
-	}
-
-	profiles = append(profiles, profile)
 
 	return profiles
 }
