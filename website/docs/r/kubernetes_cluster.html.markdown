@@ -27,6 +27,7 @@ resource "azurerm_kubernetes_cluster" "test" {
   location               = "${azurerm_resource_group.test.location}"
   resource_group_name    = "${azurerm_resource_group.test.name}"
   kubernetes_version     = "1.8.2"
+  dns_prefix             = "acctestagent1"
 
   linux_profile {
     admin_username = "acctestuser1"
@@ -39,7 +40,6 @@ resource "azurerm_kubernetes_cluster" "test" {
   agent_pool_profile {
     name            = "default"
     count           = 1
-    dns_prefix      = "acctestagent1"
     vm_size         = "Standard_A0"
     storage_profile = "ManagedDisks"
     os_type         = "Linux"
@@ -66,7 +66,7 @@ The following arguments are supported:
 
 * `resource_group_name` - (Required) Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 
-* `dns_prefix` - (Optional) DNS prefix specified when creating the managed cluster.
+* `dns_prefix` - (Required) DNS prefix specified when creating the managed cluster.
 
 * `kubernetes_version` - (Optional) Version of Kubernetes specified when creating the AKS managed cluster.
 
@@ -93,6 +93,7 @@ The following arguments are supported:
 * `count` - (Required) Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 50 (inclusive). The default value is 1.
 * `vm_size` - (Required) The VM Size of each of the Agent Pool VM's (e.g. Standard_F1 / Standard_D2v2).
 * `storage_profile` - (Optional) Storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice.
+* `vnet_subnet_id` - (Optional) The subnet to place the Agent Pool VM's in.
 * `os_type` - (Optional) OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux.
 
 `service_principal` supports the following:

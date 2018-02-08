@@ -1,14 +1,26 @@
-## 1.1.1 (Unreleased)
+## 1.1.2 (Unreleased)
 
 BUG FIXES:
 
-* `azurerm_public_ip` - Setting the `ip_address` field regardless of the DNS Settings [GH-772]
-* `azurerm_virtual_machine` - ignores the case of the Managed Data Disk ID's to work around an Azure Portal bug [GH-792]
+* **Data Source:** `azurerm_virtual_network` - Fixing a crash when the DhcpOptions aren't specified [GH-803]
 
 FEATURES:
 
-* **New Data Source:** `azurerm_storage_account` [GH-794]
-* **New Data Source:** `azurerm_virtual_network_gateway` [GH-796]
+* core: upgrading to `v12.4.0` of the Azure SDK for Go [GH-797]
+* compute: upgrading to use the `2017-12-01` API Version [GH-797]
+* `azurerm_subnet` - add support for Service Endpoints [GH-786]
+
+## 1.1.1 (February 06, 2018)
+
+BUG FIXES:
+
+* `azurerm_public_ip` - Setting the `ip_address` field regardless of the DNS Settings ([#772](https://github.com/terraform-providers/terraform-provider-azurerm/issues/772))
+* `azurerm_virtual_machine` - ignores the case of the Managed Data Disk ID's to work around an Azure Portal bug ([#792](https://github.com/terraform-providers/terraform-provider-azurerm/issues/792))
+
+FEATURES:
+
+* **New Data Source:** `azurerm_storage_account` ([#794](https://github.com/terraform-providers/terraform-provider-azurerm/issues/794))
+* **New Data Source:** `azurerm_virtual_network_gateway` ([#796](https://github.com/terraform-providers/terraform-provider-azurerm/issues/796))
 
 ## 1.1.0 (January 26, 2018)
 
