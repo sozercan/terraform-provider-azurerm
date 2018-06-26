@@ -28,6 +28,11 @@ func dataSourceArmKubernetesCluster() *schema.Resource {
 				Computed: true,
 			},
 
+			"enable_rbac": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+
 			"fqdn": {
 				Type:     schema.TypeString,
 				Computed: true,

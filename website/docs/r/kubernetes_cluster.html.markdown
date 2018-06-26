@@ -27,6 +27,7 @@ resource "azurerm_kubernetes_cluster" "test" {
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   dns_prefix          = "acctestagent1"
+  enable_rbac         = true
 
   linux_profile {
     admin_username = "acctestuser1"
@@ -90,6 +91,8 @@ The following arguments are supported:
 * `resource_group_name` - (Required) Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 
 * `dns_prefix` - (Required) DNS prefix specified when creating the managed cluster.
+
+* `enable_rbac` - (Optional) Whether to enable Kubernetes Role-Based Access Control.
 
 * `kubernetes_version` - (Optional) Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade).
 

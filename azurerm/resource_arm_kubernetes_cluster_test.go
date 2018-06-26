@@ -186,7 +186,8 @@ resource "azurerm_kubernetes_cluster" "test" {
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   dns_prefix          = "acctestaks%d"
-  kubernetes_version  = "1.7.7"
+	kubernetes_version  = "1.7.7"
+	enable_rbac         = true
 
   linux_profile {
     admin_username = "acctestuser%d"
@@ -223,6 +224,7 @@ resource "azurerm_kubernetes_cluster" "test" {
   resource_group_name = "${azurerm_resource_group.test.name}"
   dns_prefix          = "acctestaks%d"
   kubernetes_version  = "1.7.7"
+	enable_rbac         = true
 
   linux_profile {
     admin_username = "acctestuser%d"
@@ -276,7 +278,8 @@ resource "azurerm_kubernetes_cluster" "test" {
   location               = "${azurerm_resource_group.test.location}"
   resource_group_name    = "${azurerm_resource_group.test.name}"
   dns_prefix             = "acctestaks%d"
-  kubernetes_version     = "1.7.7"
+	kubernetes_version     = "1.7.7"
+	enable_rbac         = true
 
   linux_profile {
     admin_username = "acctestuser%d"
@@ -313,7 +316,8 @@ resource "azurerm_kubernetes_cluster" "test" {
   location               = "${azurerm_resource_group.test.location}"
   resource_group_name    = "${azurerm_resource_group.test.name}"
   dns_prefix             = "acctestaks%d"
-  kubernetes_version     = "1.8.1"
+	kubernetes_version     = "1.8.1"
+	enable_rbac         = true
 
   linux_profile {
     admin_username = "acctestuser%d"

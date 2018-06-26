@@ -47,6 +47,8 @@ The following attributes are exported:
 
 * `dns_prefix` - The DNS Prefix of the managed Kubernetes cluster.
 
+* `enable_rbac` - (Optional) Whether to enable Kubernetes Role-Based Access Control.
+
 * `kubernetes_version` - The version of Kubernetes used on the managed Kubernetes Cluster.
 
 * `linux_profile` - A `linux_profile` block as documented below.
